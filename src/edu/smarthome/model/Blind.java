@@ -3,12 +3,12 @@ package edu.smarthome.model;
 import edu.smarthome.observer.DeviceChangedEvent;
 import edu.smarthome.observer.EventBus;
 
-public class Blinds implements Device {
+public class Blind implements Device {
     private final String name;
     private final EventBus bus;
     private boolean on;
 
-    public Blinds(String name, EventBus bus) {
+    public Blind(String name, EventBus bus) {
         this.name = name;
         this.bus = bus;
     }
