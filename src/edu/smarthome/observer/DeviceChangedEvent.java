@@ -1,4 +1,4 @@
-package edu.smarthome.model;
+package edu.smarthome.observer;
 
 import edu.smarthome.model.Device;
 

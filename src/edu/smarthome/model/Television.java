@@ -1,5 +1,6 @@
 package edu.smarthome.model;
 
+import edu.smarthome.observer.DeviceChangedEvent;
 import edu.smarthome.observer.EventBus;
 
 public class Television implements  Device {
