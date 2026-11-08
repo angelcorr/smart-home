@@ -6,7 +6,7 @@ import edu.smarthome.observer.EventBus;
 
 public class LightCreator extends DeviceCreator {
   @Override
-  protected Device createDevice(String name, EventBus bus) {
-    return new Light(name, bus);
+  protected Device createDevice(String id,String name, EventBus bus) {
+    return new Light(id,name, bus);
   }
 }

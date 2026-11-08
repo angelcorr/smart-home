@@ -3,28 +3,17 @@ package edu.smarthome.model;
 import edu.smarthome.observer.DeviceChangedEvent;
 import edu.smarthome.observer.EventBus;
 
-public class Blind implements Device {
-    private final String name;
-    private final EventBus bus;
-    private boolean on;
+public class Blind extends DeviceBase {
+    private int opening;
 
-    public Blind(String name, EventBus bus) {
-        this.name = name;
-        this.bus = bus;
+    public Blind (String id, String name, EventBus bus) {
+        super(id, name, bus);
     }
 
-    public void turnOn() {
-        on = true;
-        bus.publish(new DeviceChangedEvent(this, "turned on"));
+    public int getOpening() { return opening; }
+
+    public void setOpening(int value) {
+        opening = Math.max(0, Math.min(100, value));
+        bus.publish(new DeviceChangedEvent(this, "opening " + opening));
     }
-
-    public void turnOff() {
-        on = false;
-        bus.publish(new DeviceChangedEvent(this, "turned off"));
-    }
-
-    public boolean isOn() { return on; }
-
-    @Override
-    public String getName() { return name; }
 }

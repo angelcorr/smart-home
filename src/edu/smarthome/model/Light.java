@@ -3,28 +3,17 @@ package edu.smarthome.model;
 import edu.smarthome.observer.DeviceChangedEvent;
 import edu.smarthome.observer.EventBus;
 
-public class Light implements Device {
-    private final String name;
-    private final EventBus bus;
-    private boolean on;
+public class Light extends DeviceBase {
+    private int brightness;
 
-    public Light(String name, EventBus bus) {
-        this.name = name;
-        this.bus = bus;
+    public Light(String id, String name, EventBus bus) {
+        super(id, name, bus);
     }
 
-    public void turnOn() {
-        on = true;
-        bus.publish(new DeviceChangedEvent(this, "turned on"));
+    public int getBrightness() { return brightness; }
+
+    public void setBrightness(int value) {
+        brightness = Math.max(0, Math.min(100, value));
+        bus.publish(new DeviceChangedEvent(this, "brightness " + brightness));
     }
-
-    public void turnOff() {
-        on = false;
-        bus.publish(new DeviceChangedEvent(this, "turned off"));
-    }
-
-    public boolean isOn() { return on; }
-
-    @Override
-    public String getName() { return name; }
 }

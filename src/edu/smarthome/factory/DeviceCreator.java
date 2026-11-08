@@ -7,11 +7,11 @@ import edu.smarthome.observer.EventBus;
 
 public abstract class DeviceCreator {
 
-  protected abstract Device createDevice(String name, EventBus bus);
+  protected abstract Device createDevice(String id,String name, EventBus bus);
 
   // Shared workflow (uses the factory method)
-  public Device create(String name, Room room, EventBus bus) {
-    Device device = createDevice(name, bus);
+  public Device create(String id,String name, Room room, EventBus bus) {
+    Device device = createDevice(id,name, bus);
     room.add(device);                                // Composite
     bus.publish(new DeviceAddedEvent(device, room)); // Observer
     return device;

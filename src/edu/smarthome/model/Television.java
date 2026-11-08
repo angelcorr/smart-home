@@ -3,28 +3,25 @@ package edu.smarthome.model;
 import edu.smarthome.observer.DeviceChangedEvent;
 import edu.smarthome.observer.EventBus;
 
-public class Television implements  Device {
-    private final String name;
-    private final EventBus bus;
-    private boolean on;
+public class Television extends DeviceBase {
+    private int channel;
+    private int volume;
 
-    public Television(String name, EventBus bus) {
-        this.name = name;
-        this.bus = bus;
+    public Television(String id, String name, EventBus bus) {
+        super(id, name, bus);
     }
 
-    public void turnOn() {
-        on = true;
-        bus.publish(new DeviceChangedEvent(this, "turned on"));
+    public int getChannel() { return channel; }
+
+    public void changeChannel(int newChannel) {
+        channel = newChannel;
+        bus.publish(new DeviceChangedEvent(this, "channel " + channel));
     }
 
-    public void turnOff() {
-        on = false;
-        bus.publish(new DeviceChangedEvent(this, "turned off"));
+    public int getVolume() { return volume; }
+
+    public void setVolume(int value) {
+        volume = Math.max(0, Math.min(100, value));
+        bus.publish(new DeviceChangedEvent(this, "volume " + volume));
     }
-
-    public boolean isOn() { return on; }
-
-    @Override
-    public String getName() { return name; }
 }
