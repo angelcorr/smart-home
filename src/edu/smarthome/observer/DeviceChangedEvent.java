@@ -17,7 +17,7 @@ public final class DeviceChangedEvent {
     @Override
     public String toString() {
         return "DeviceChangedEvent[device=" + device.getName()
-                + ", description=" + description + "]";
+                + ", description= " + description + "]";
     }
 }
 
