@@ -5,7 +5,7 @@ import edu.smarthome.observer.EventBus;
 
 public class Television extends DeviceBase {
     private int channel;
-    private int volume;
+    private int volume = 10;
 
     public Television(String id, String name, EventBus bus) {
         super(id, name, bus);
@@ -23,5 +23,10 @@ public class Television extends DeviceBase {
     public void setVolume(int value) {
         volume = Math.max(0, Math.min(100, value));
         bus.publish(new DeviceChangedEvent(this, "volume " + volume));
+    }
+
+    @Override
+    public String getState() {
+        return on ? "on, channel " + channel + ", volume " + volume : "off";
     }
 }

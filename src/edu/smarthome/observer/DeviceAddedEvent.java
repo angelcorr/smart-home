@@ -12,11 +12,11 @@ public final class DeviceAddedEvent {
     this.room = room;
   }
 
-  public Device getDevice() {
+  public Device device() {
     return device;
   }
 
-  public Room getRoom() {
+  public Room room() {
     return room;
   }
 
