@@ -4,5 +4,6 @@ public enum DeviceType {
   LIGHT,
   TELEVISION,
   BLIND,
-  THERMOSTAT
+  THERMOSTAT,
+  LEGACY_THERMOSTAT
 }

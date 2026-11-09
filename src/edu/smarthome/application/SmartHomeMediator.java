@@ -43,7 +43,7 @@ public class SmartHomeMediator {
         if (creator == null) {
             throw new IllegalArgumentException("Unsupported device type: " + type);
         }
-        Device device = creator.create(id, name, room, bus);
+        Device device = creator.create(name, room, bus);
         devices.put(id, device);
         deviceRooms.put(device, room);
         return device;
