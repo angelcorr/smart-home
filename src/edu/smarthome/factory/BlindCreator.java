@@ -6,6 +6,9 @@ import edu.smarthome.observer.EventBus;
 
 public class BlindCreator extends DeviceCreator {
   @Override
+  protected String idPrefix() { return "BLIND"; }
+
+  @Override
   protected Device createDevice(String id,String name, EventBus bus) {
     return new Blind(id,name, bus);
   }

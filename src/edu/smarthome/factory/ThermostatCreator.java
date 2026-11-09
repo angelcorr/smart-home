@@ -7,6 +7,9 @@ import edu.smarthome.strategy.ComfortStrategy;
 
 public class ThermostatCreator extends DeviceCreator {
   @Override
+  protected String idPrefix() { return "THERMO"; }
+
+  @Override
   protected Device createDevice(String id, String name, EventBus bus) {
     return new Thermostat(id, name, bus, new ComfortStrategy());
   }

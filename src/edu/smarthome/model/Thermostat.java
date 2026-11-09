@@ -6,7 +6,7 @@ import edu.smarthome.strategy.ClimateStrategy;
 
 import java.time.LocalTime;
 
-public class Thermostat extends DeviceBase {
+public class Thermostat extends DeviceBase implements ClimateControl {
   private static final double TOLERANCE = 0.5;
 
   private ClimateStrategy strategy;
@@ -16,9 +16,30 @@ public class Thermostat extends DeviceBase {
   public Thermostat(String id, String name, EventBus bus, ClimateStrategy strategy) {
     super(id, name, bus);
     this.strategy = strategy;
+    this.on = true;
+  }
+
+  @Override
+  public void turnOn() {
+    super.turnOn();
+    regulate(LocalTime.now());
+  }
+
+  @Override
+  public void turnOff() {
+    super.turnOff();
+    regulate(LocalTime.now());
+    mode = HvacMode.IDLE;
+  }
+
+  @Override
+  public String getState() {
+    return on ? mode + " " + currentTemperature + " °C (target " + getTargetTemperature() + ")" : "off";
   }
 
   public void setStrategy(ClimateStrategy newStrategy) {
+    if (!on) return; // Early return when the thermostat is off
+
     this.strategy = newStrategy;
     bus.publish(new DeviceChangedEvent(this, "strategy changed to " + newStrategy.getName()));
     regulate(LocalTime.now());
