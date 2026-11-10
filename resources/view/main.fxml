@@ -20,7 +20,7 @@
     </top>
 
     <left>
-        <VBox prefWidth="320" spacing="6" style="-fx-padding: 8;">
+        <VBox prefWidth="330" spacing="6" style="-fx-padding: 6 6 6 25;">
             <Label text="Home" style="-fx-font-weight: bold;"/>
             <TreeView fx:id="homeTree" VBox.vgrow="ALWAYS"/>
         </VBox>
@@ -62,9 +62,9 @@
     </center>
 
     <bottom>
-        <VBox spacing="4" style="-fx-padding: 8;">
+        <VBox spacing="4" style="-fx-padding: 25 20 25 20;">
             <Label text="Event log" style="-fx-font-weight: bold;"/>
-            <ListView fx:id="logList" prefHeight="170"/>
+            <ListView fx:id="logList" prefHeight="140"/>
         </VBox>
     </bottom>
 </BorderPane>

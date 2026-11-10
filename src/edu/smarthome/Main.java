@@ -22,8 +22,8 @@ public class Main extends Application {
 
     stage.setScene(new Scene(loader.load()));
     stage.setTitle("Smart Home");
-    stage.setMinWidth(1100);
-    stage.setMinHeight(700);
+    stage.setMinWidth(1120);
+    stage.setMinHeight(780);
     stage.show();
   }
 
@@ -51,7 +51,7 @@ public class Main extends Application {
     ctx.mediator.createDevice(DeviceType.LIGHT, "Bedside light", bedroom);
     ctx.mediator.createDevice(DeviceType.LEGACY_THERMOSTAT, "Old vendor thermostat in the bedroom", bedroom);
     ctx.mediator.createDevice(DeviceType.LIGHT, "Desk light", office);
-    ctx.mediator.createDevice(DeviceType.LIGHT, "Light bathroom second floor", office);
+    ctx.mediator.createDevice(DeviceType.LIGHT, "Light bathroom second floor", bathroom);
     ctx.mediator.createDevice(DeviceType.MOTION_SENSOR, "Hall motion sensor", living);
     ctx.mediator.createDevice(DeviceType.DOOR_LOCK, "Front door", living);
   }

@@ -4,7 +4,7 @@ import edu.smarthome.observer.DeviceChangedEvent;
 import edu.smarthome.observer.EventBus;
 
 public class Television extends DeviceBase {
-    private int channel;
+    private int channel = 9;
     private int volume = 10;
 
     public Television(String id, String name, EventBus bus) {
