@@ -22,7 +22,7 @@
     <left>
         <VBox prefWidth="330" spacing="6" style="-fx-padding: 6 6 6 25;">
             <Label text="Home" style="-fx-font-weight: bold;"/>
-            <TreeView fx:id="homeTree" VBox.vgrow="ALWAYS"/>
+            <TreeView fx:id="homeTree"/>
         </VBox>
     </left>
 

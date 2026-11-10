@@ -95,6 +95,11 @@ public class MainController {
   // Composite implementation
   private void setUpTree() {
     homeTree.setCellFactory(tv -> new TreeCell<>() {
+      {
+        setWrapText(true);
+        setPrefWidth(0);
+      }
+
       @Override
       protected void updateItem(Device device, boolean empty) {
         super.updateItem(device, empty);

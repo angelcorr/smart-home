@@ -20,7 +20,9 @@ public class Main extends Application {
     FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/main.fxml"));
     loader.setControllerFactory(type -> new MainController(ctx));
 
-    stage.setScene(new Scene(loader.load()));
+    Scene scene = new Scene(loader.load());
+    scene.getStylesheets().add(Main.class.getResource("/css/app.css").toExternalForm());
+    stage.setScene(scene);
     stage.setTitle("Smart Home");
     stage.setMinWidth(1120);
     stage.setMinHeight(780);
