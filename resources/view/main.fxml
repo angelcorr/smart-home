@@ -36,6 +36,15 @@
                 <Button text="Turn off" onAction="#onTurnOff"/>
             </HBox>
 
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Security"/>
+                <Button text="Arm home" onAction="#onArmHome"/>
+                <Button text="Arm away" onAction="#onArmAway"/>
+                <Button text="Disarm" onAction="#onDisarm"/>
+                <Button text="Simulate motion" onAction="#onSimulateMotion"/>
+            </HBox>
+
+            <Label fx:id="securityLabel" text="Security: Disarmed"/>
             <HBox fx:id="brightnessBox" spacing="8" alignment="CENTER_LEFT">
                 <Label text="Brightness"/>
                 <Slider fx:id="brightnessSlider" min="0" max="100" prefWidth="260"
