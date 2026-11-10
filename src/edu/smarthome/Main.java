@@ -41,7 +41,6 @@ public class Main extends Application {
 
     ctx.home.add(living);
     ctx.home.add(kitchen);
-    ctx.home.add(bathroom);
     ctx.home.add(upstairs);
 
     ctx.mediator.createDevice(DeviceType.LIGHT, "Ceiling light living room", living);

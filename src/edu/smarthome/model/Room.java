@@ -10,7 +10,6 @@ public class Room extends DeviceGroup {
         super("room-" + name.toLowerCase().replace(' ', '-'), name);
     }
 
-    public void add(Device device) { devices.add(device); }
     public List<Device> getDevices() {
         return getChildren();
     }
