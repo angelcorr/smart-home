@@ -52,6 +52,8 @@ public class Main extends Application {
     ctx.mediator.createDevice(DeviceType.LEGACY_THERMOSTAT, "Old vendor thermostat in the bedroom", bedroom);
     ctx.mediator.createDevice(DeviceType.LIGHT, "Desk light", office);
     ctx.mediator.createDevice(DeviceType.LIGHT, "Light bathroom second floor", office);
+    ctx.mediator.createDevice(DeviceType.MOTION_SENSOR, "Hall motion sensor", living);
+    ctx.mediator.createDevice(DeviceType.DOOR_LOCK, "Front door", living);
   }
 
   public static void main(String[] args) {

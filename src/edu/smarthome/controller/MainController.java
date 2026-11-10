@@ -13,6 +13,7 @@ import edu.smarthome.strategy.AwayStrategy;
 import edu.smarthome.strategy.ClimateStrategy;
 import edu.smarthome.strategy.ComfortStrategy;
 import edu.smarthome.strategy.EcoStrategy;
+import edu.smarthome.observer.SecurityStateChangedEvent;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
+
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -48,6 +50,7 @@ public class MainController {
   @FXML private ComboBox<ClimateStrategy> strategyCombo;
   @FXML private TextField tempField;
   @FXML private ListView<String> logList;
+  @FXML private Label securityLabel;
 
   public MainController(AppContext ctx) {
     this.ctx = ctx;
@@ -76,6 +79,10 @@ public class MainController {
     ctx.bus.subscribe(DeviceAddedEvent.class, e -> Platform.runLater(() -> {
       log(e.device().getName() + " added to " + e.room().getName());
       rebuildTree();
+    }));
+    ctx.bus.subscribe(SecurityStateChangedEvent.class, e -> Platform.runLater(() -> {
+      securityLabel.setText("Security: " + e.stateName());
+      log("Security: " + e.stateName());
     }));
 
     showDetail(null);
@@ -249,6 +256,32 @@ public class MainController {
 
   @FXML private void onAllOff()  {
     run(Commands.turnOff(ctx.home));
+  }
+
+  @FXML
+  private void onArmHome() {
+    ctx.mediator.armHome();
+  }
+
+  @FXML
+  private void onArmAway() {
+    ctx.mediator.armAway();
+  }
+
+  @FXML
+  private void onDisarm() {
+    ctx.mediator.disarm();
+  }
+
+  @FXML
+  private void onSimulateMotion() {
+    for (Device device : ctx.mediator.getDevices()) {
+      if (device instanceof MotionSensor sensor) {
+        sensor.detectMotion();
+        return;
+      }
+    }
+    log("No motion sensor in the home");
   }
 
   @FXML
