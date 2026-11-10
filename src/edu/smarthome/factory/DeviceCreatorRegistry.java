@@ -12,6 +12,8 @@ public class DeviceCreatorRegistry {
     creators.put(DeviceType.BLIND, new BlindCreator());
     creators.put(DeviceType.THERMOSTAT, new ThermostatCreator());
     creators.put(DeviceType.LEGACY_THERMOSTAT, new LegacyThermostatCreator());
+    creators.put(DeviceType.MOTION_SENSOR, new MotionSensorCreator());
+    creators.put(DeviceType.DOOR_LOCK, new DoorLockCreator());
   }
 
   public DeviceCreator get(DeviceType type) {
