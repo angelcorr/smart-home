@@ -313,5 +313,4 @@ public class MainController {
   private void log(String text) {
     logList.getItems().add(0, LocalTime.now().format(TIME) + " " + text);
   }
-
 }
