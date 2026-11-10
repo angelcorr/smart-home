@@ -28,7 +28,6 @@ public class Thermostat extends DeviceBase implements ClimateControl {
   @Override
   public void turnOff() {
     super.turnOff();
-    regulate(LocalTime.now());
     mode = HvacMode.IDLE;
   }
 
@@ -38,20 +37,18 @@ public class Thermostat extends DeviceBase implements ClimateControl {
   }
 
   public void setStrategy(ClimateStrategy newStrategy) {
-    if (!on) return; // Early return when the thermostat is off
-
     this.strategy = newStrategy;
     bus.publish(new DeviceChangedEvent(this, "strategy changed to " + newStrategy.getName()));
     regulate(LocalTime.now());
   }
 
   public void setCurrentTemperature(double temperature) {
-    System.out.println("New temperature: " + temperature);
     this.currentTemperature = temperature;
     regulate(LocalTime.now());
   }
 
   public void regulate(LocalTime now) {
+    if (!on) return; // Early return when the thermostat is off
     double target = strategy.targetTemperature(now);
     HvacMode newMode;
 

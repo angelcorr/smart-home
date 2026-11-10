@@ -1,7 +1,6 @@
 package edu.smarthome.application;
 
-import edu.smarthome.command.Command;
-import edu.smarthome.command.CommandHistory;
+import edu.smarthome.command.*;
 import edu.smarthome.factory.DeviceCreator;
 import edu.smarthome.factory.DeviceCreatorRegistry;
 import edu.smarthome.factory.DeviceType;
@@ -11,8 +10,6 @@ import edu.smarthome.observer.EventBus;
 import edu.smarthome.model.Light;
 import edu.smarthome.model.Television;
 import edu.smarthome.observer.DeviceChangedEvent;
-import edu.smarthome.command.TurnOnCommand;
-import edu.smarthome.command.TurnOffCommand;
 
 
 import java.util.Collection;
@@ -27,24 +24,22 @@ public class SmartHomeMediator {
     private final DeviceCreatorRegistry registry;
     private final Map<String, Device> devices = new HashMap<>();
     private final Map<Device, Room> deviceRooms = new HashMap<>();
-    private final CommandHistory history = new CommandHistory();
+    private CommandHistory history = new CommandHistory();
 
-    public SmartHomeMediator(EventBus bus, DeviceCreatorRegistry registry) {
+    public SmartHomeMediator(EventBus bus, DeviceCreatorRegistry registry, CommandHistory history) {
         this.bus = bus;
         this.registry = registry;
+        this.history = history;
         bus.subscribe(DeviceChangedEvent.class, this::onDeviceChanged);
     }
 
-    public Device createDevice(DeviceType type, String id, String name, Room room) {
-        if (devices.containsKey(id)) {
-            throw new IllegalArgumentException("A device with id " + id + " already exists");
-        }
+    public Device createDevice(DeviceType type, String name, Room room) {
         DeviceCreator creator = registry.get(type);
         if (creator == null) {
             throw new IllegalArgumentException("Unsupported device type: " + type);
         }
         Device device = creator.create(name, room, bus);
-        devices.put(id, device);
+        devices.put(device.getId(), device);
         deviceRooms.put(device, room);
         return device;
     }
@@ -70,8 +65,7 @@ public class SmartHomeMediator {
     }
 
     public void execute(Command command) {
-        command.execute();
-        history.push(command);
+        history.execute(command);
     }
 
     public void undo() {
@@ -91,8 +85,8 @@ public class SmartHomeMediator {
             return;
         }
         for (Device device : room.getDevices()) {
-            if (device instanceof Light) {
-                ((Light) device).setBrightness(brightness);
+            if (device instanceof Light light) {
+                execute(new SetBrightnessCommand(light, brightness));
             }
         }
     }

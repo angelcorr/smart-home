@@ -16,4 +16,9 @@ public class Blind extends DeviceBase {
         opening = Math.max(0, Math.min(100, value));
         bus.publish(new DeviceChangedEvent(this, "opening " + opening));
     }
+
+    @Override
+    public String getState() {
+        return on ? "open " + opening + "%" : "closed";
+    }
 }
